@@ -1,0 +1,90 @@
+import java.util.Scanner;
+
+public class ShoppingCartSystem {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+        int numberOfItems;
+
+        System.out.print("How many items: ");
+        numberOfItems = scanner.nextInt();
+
+        double [] itemPrices = new double[numberOfItems];
+        double totalAmounts = 0;
+        double discounted = 0;
+        double mostExpensive = 0;
+        double leastExpensive = 0;
+
+
+        for( int i = 0; i < numberOfItems ; i++){
+
+
+            double discount = 100;
+
+            System.out.print("Enter the item price: ");
+            itemPrices[i] = scanner.nextDouble();
+
+            if(itemPrices[i] > discount){
+                System.out.println(" - 10% discount - ");
+            }
+        }
+
+        discounted = discountedItem(itemPrices);
+        totalAmounts = totalAmount(itemPrices);
+        mostExpensive = expensiveItem(itemPrices);
+        leastExpensive = leastExpensiveItem(itemPrices);
+
+
+        System.out.println("\n--------------------------");
+        System.out.print("\nTotal amount: " + totalAmounts);
+        System.out.print("\nWith discounted items: " + discounted);
+        System.out.print("\nMost expensive item: " + mostExpensive);
+        System.out.print("\nLeast expensive item: " + leastExpensive);
+
+        scanner.close();
+
+    }
+    static double discountedItem(double [] itemPrices){
+
+        double discountedPrice = 100;
+        double percentageDiscount = .10;
+        double discount = 0;
+
+   for(double itemPrice : itemPrices) {
+     if (itemPrice > discountedPrice) {
+        discount += itemPrice - (itemPrice * percentageDiscount);
+     }
+     else{
+        discount += itemPrice;
+     }
+   }
+        return discount;
+    }
+
+    static double totalAmount(double [] itemPrices){
+       double sum = 0;
+      for( double itemPrice : itemPrices){
+          sum += itemPrice;
+      }
+      return sum;
+    }
+    static double expensiveItem(double []itemPrices){
+        double highest = itemPrices[0];
+        for(double itemPrice : itemPrices){
+            if(itemPrice > highest){
+                highest = itemPrice;
+            }
+        }
+        return highest;
+    }
+    static double leastExpensiveItem(double []itemPrices){
+        double lowest = itemPrices[0];
+
+        for(double itemPrice : itemPrices){
+            if(itemPrice < lowest){
+              lowest = itemPrice;
+            }
+        }
+        return lowest;
+    }
+}
