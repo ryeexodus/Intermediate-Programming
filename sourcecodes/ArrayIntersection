@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class ArrayIntersection {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int occurrences;
+
+        System.out.println("How many numbers: "); //occurrence
+        occurrences = scanner.nextInt();
+
+        int[] array1 = new int[occurrences]; //store array 1
+        int[] array2 = new int[occurrences]; //store array 2
+
+        System.out.println("Array 1: ");
+        for (int i = 0; i < occurrences; i++) { //iterate through array 1
+            System.out.print("Enter array of numbers: "); //ask user depending on the  number of occurrence
+            array1[i] = scanner.nextInt(); //store
+
+        }
+        System.out.println("Array 2: ");
+        for (int i = 0; i < occurrences; i++) { //iterate through array 2
+            System.out.print("Enter array of numbers: "); //ask user depending on the  number of occurrence
+            array2[i] = scanner.nextInt(); // store
+        }
+        
+        scanner.close();
+        System.out.println("\nIntersecting Integers: ");
+        for (int i = 0; i < array1.length; i++) { //check array 1
+            for (int j = 0; j < array2.length; j++ ){ // check array 2
+                if(array1[i] == array2[j]){ // condition
+                    System.out.print(" " + array1[i]); // print the result
+                    break; // avoid printing duplicates if array 2 has duplicates
+                }
+            }
+        }
+    }
+}
+
+
+
