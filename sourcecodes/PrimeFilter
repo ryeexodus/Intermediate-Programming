@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+public class PrimeFilter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int occurrence;
+
+        // Ask the user how many numbers they want to enter
+        System.out.print("Enter the value of n: ");
+        occurrence = scanner.nextInt();
+
+        // Create an array to store the input numbers
+        int[] originalArrays = new int[occurrence];
+
+        // Input loop: read n numbers from the user
+        for (int i = 0; i < occurrence; i++) {
+            System.out.print("Enter the number:  ");
+            originalArrays[i] = scanner.nextInt();
+        }
+
+        // Display the original array
+        System.out.println("Original Array: ");
+        for (int i = 0; i < occurrence; i++) {
+            System.out.print(" " + originalArrays[i]);
+        }
+
+        // Display the modified array:
+        // Replace non-prime numbers with 0, keep primes as they are
+        System.out.println("\nModified array: ");
+        for (int i = 0; i < occurrence; i++){
+            if(isPrime(originalArrays[i])) {
+                // If the number is prime, print it
+                System.out.print(" " + originalArrays[i]);
+            } else {
+                // If not prime, print 0 instead
+                System.out.print("0 ");
+            }
+        }
+    }
+
+    // Method to check if a number is prime
+    static boolean isPrime(int original) {
+        // Numbers less than or equal to 1 are not prime
+        if(original <= 1) {
+            return false;
+        }
+        // 2 is the only even prime number
+        if(original == 2) {
+            return true;
+        }
+        // Any other even number is not prime
+        if(original % 2 == 0) {
+            return false;
+        }
+
+        // Check divisibility by odd numbers up to sqrt(original)
+        for(int i = 3; i <= Math.sqrt(original); i += 2) {
+            if (original % i == 0) {
+                return false; // Found a divisor, not prime
+            }
+        }
+        return true; // No divisors found, number is prime
+    }
+}
