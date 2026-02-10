@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class RowVsColumn {
+    public static void main(String [] args){
+Scanner scanner = new Scanner(System.in);
+        int numOfRows;
+        int numOfColumns;
+
+        System.out.print("Enter the number of rows: ");
+        numOfRows = scanner.nextInt();
+        System.out.print("Enter the number of columns: ");
+        numOfColumns = scanner.nextInt();
+
+
+        int [] [] array = new int[numOfRows][numOfColumns];
+
+        for(int rows = 0 ; rows < numOfRows; rows++){
+            for(int col = 0; col < numOfColumns; col++){
+                System.out.print("Enter the value of row and columns: ");
+                array[rows][col] = scanner.nextInt();
+            }
+            System.out.println();
+        }
+
+        System.out.println("Rows:");
+
+        int allRowsProduct = 1;
+        for(int rows = 0 ; rows < numOfRows; rows++){
+
+            for(int col = 0; col < numOfColumns; col++){
+                allRowsProduct *= array[rows][0];
+            }
+            System.out.println("rows: " + allRowsProduct);
+        }
+
+        System.out.println("\nColumn:");
+
+        for(int col = 0 ; col < numOfColumns; col++){
+            int allColProduct = 1;
+            for(int rows = 0; rows < numOfRows; rows++){
+                allColProduct *= array[0][col];
+
+            }
+            System.out.println("column: " + allColProduct);
+        }
+    }
+}
+
+
