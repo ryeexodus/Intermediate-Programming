@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StudentList {
+    static Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+
+        ArrayList<String> menus = new ArrayList<>();
+
+        while(true){
+            menuList();
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            if(choice == 6){
+                System.out.println("Thank you for using the program");
+                break;
+            }
+
+            switch (choice){
+                case 1 -> {
+                    addStudent(menus);
+                    System.out.println("Student added!");
+                }
+                case 2 -> {
+                    viewStudent(menus);
+                }
+                case 3 -> {
+                    searchStudent(menus);
+                    System.out.println();
+                }
+                case 4 -> {
+                    updateStudent(menus);
+                    System.out.println("Student updated!");
+                }
+                case 5 ->{
+                    removeStudent(menus);
+                    System.out.println("Student removed! ");
+                }
+                default -> System.out.println("Invalid");
+            }
+        }
+
+
+    }
+    static void menuList(){
+        System.out.println("STUDENT RECORD MANAGER");
+        System.out.println("1. Add Student" );
+        System.out.println("2. View Student" );
+        System.out.println("3. Search Student" );
+        System.out.println("4. Update Student" );
+        System.out.println("5. Remove Student" );
+        System.out.println("6. Exit");
+        System.out.println("Enter choice: ");
+    }
+    static void addStudent(ArrayList<String> menu){
+        System.out.println("Enter the student name: ");
+        String studentName = scanner.nextLine();
+        menu.add(studentName);
+    }
+    static void viewStudent(ArrayList<String> views){
+        System.out.println("Student List: ");
+        for(String view : views){
+            System.out.println(view);
+        }
+    }
+    static void searchStudent(ArrayList<String> search){
+        System.out.println("Enter name to search: ");
+        String nameSearch = scanner.nextLine();
+
+        if(search.contains(nameSearch)){
+            System.out.println("Student found! ");
+        }
+        else{
+            System.out.println("Student not found");
+        }
+    }
+    static void updateStudent(ArrayList<String> update){
+        System.out.print("Enter index to search: ");
+        int indexUpdate = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter new name: ");
+        String newName = scanner.nextLine();
+        update.set(indexUpdate, newName);
+    }
+    static void removeStudent(ArrayList<String> removeStudents){
+        System.out.println("Enter index to remove: ");
+        int removeStudent = scanner.nextInt();
+        removeStudents.remove(removeStudent);
+    }
+
+}
+
