@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class Mirror2DArray {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
+        //Get the initial size
+        System.out.print("Enter the size: ");
+        int size = scanner.nextInt();
+
+
+        //Instantiate 2d array
+        int[][] elements = new int[size][size];
+
+        //Get elements
+        System.out.println("Enter numbers: ");
+        for (int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++){
+                elements[i][j] = scanner.nextInt();
+            }
+        }
+
+        //Process
+        for (int i = 0; i < size; i++) {
+            // We only go up to size / 2, otherwise we swap things twice
+            for(int j = 0; j < size/2; j++){
+                // The standard swap pattern
+                int temp;
+                temp = elements[i][j];
+
+                // Swap with the element on the opposite side of the same row
+                elements[i][j] = elements[i][size - 1 - j];
+                elements[i][size - 1 - j] = temp;
+            }
+        }
+
+        //Print
+        System.out.println("Mirror: ");
+        for (int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++){
+                System.out.print(elements[i][j] + " " );
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+
