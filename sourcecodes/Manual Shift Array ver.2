@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class ManualShiftArray2{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter size: ");
+        int size = scanner.nextInt();
+
+        int [] elements = new int[size];
+
+        // Input
+        System.out.println("Enter elements: ");
+        for(int i = 0; i < size; i++){
+            elements[i] = scanner.nextInt();
+        }
+
+        int temp = elements[size - 1]; // initialize temp and assign the last element
+
+        // Process
+        for(int i = size - 1; i > 0; i--){ // start from the back
+            
+            // Move the item from the left to the current spot
+            elements[i] = elements[i - 1];
+        }
+
+        elements[0] = temp; // reassign first index to temp to swap
+
+        // Output
+        System.out.println("Updated: ");
+        for(int i = 0; i <size; i++){
+            System.out.print(elements[i] + " ");
+        }
+    }
+}
