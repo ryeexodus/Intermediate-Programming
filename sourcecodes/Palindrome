@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class test {
+    static  Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        isPalindrome();
+
+    }
+    static void isPalindrome(){
+        System.out.println("Enter text: ");
+        String text = scanner.nextLine();
+
+        char c =  text.charAt(0);
+        String result = "";
+        boolean isPalindrome = true;
+
+        //Compressed
+        for(int i = 1; i < text.length(); i++){
+            if(text.charAt(i) != text.charAt(i - 1)){
+                result += text.charAt(i);
+            }
+        }
+        result = c + result;
+        System.out.println(result);
+
+        int firstLetter = 0;
+        int secondLetter = result.length()-1;
+
+        while(firstLetter < secondLetter){
+            if(result.charAt(firstLetter) != result.charAt(secondLetter)){
+                isPalindrome = false;
+            }
+            firstLetter++;
+            secondLetter--;
+        }
+
+        System.out.println(isPalindrome);
+        
+    }
+}
