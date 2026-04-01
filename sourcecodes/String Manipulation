@@ -1,0 +1,230 @@
+/**
+ * Name: Prilles, Rye Exodus
+ * Class code: 3002
+ */
+
+import java.util.*; // multipurpose or alternative for importing such as Scanner
+
+public class Task7_String_Manipulation {
+    static Scanner scanner = new Scanner(System.in); //static scanner inorder for all static methods to use
+    public static void main(String[] args) {
+
+        while(true){
+            displayChoices(); // Display the menu
+
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            scanner.nextLine(); // buffer to avoid error when changing data type
+
+            if(choice == 6){
+                System.out.println("Good bye. Thank you for using the program.");
+                break; // Exit the program
+            }
+            switch (choice){
+                case 1 -> spaceRemover();
+                case 2 -> passwordHider();
+                case 3 -> diamondStringPattern();
+                case 4 -> snakeCase();
+                case 5 -> isPalindrome();
+            }
+            System.out.println("/n Press ENTER to continue...");
+            scanner.nextLine(); // extra buffer to avoid mismatch error
+        }
+    }
+    static void displayChoices(){ // Display Menu
+        System.out.println("""
+                        \t--- Main Menu ---
+                        [1] - Space Remover
+                        [2] - Password Hider
+                        [3] - Diamond String Pattern
+                        [4] - snake Case
+                        [5] - is Palindrome
+                        [6] - Exit
+                        """
+        );
+    }
+
+    static void spaceRemover(){
+        System.out.println(" --- Space Remover --- ");
+        System.out.println("Enter text: "); // prompt
+        String text = scanner.nextLine();
+
+        if(text.isEmpty()){ // Validation
+            System.out.println("Input Cannot be Empty. Try again");
+            return; // Exit the method
+        }
+
+        String result = text.replace(" ", ""); // replace any spaces
+        System.out.println("Space Removed: " + result);
+        System.out.println();
+
+    }
+    static void passwordHider(){
+        System.out.println(" --- Password Hider --- ");
+        System.out.println("Enter text: ");
+        String text = scanner.nextLine();
+
+        if(text.isEmpty()){ // Validation
+            System.out.println("Input Cannot be Empty. Try again");
+            return; // Exit the method
+        }
+
+        // Flags
+        StringBuilder output = new StringBuilder(); // alternative : String output = "";
+        boolean isInside = false; // false since it hasn't checked yet
+
+        for(int i = 0; i < text.length(); i++){
+            char ch = text.charAt(i); // reassign each char to iterate through the String
+
+            if(ch == '('){ // store the value inside of parenthesis/ '('
+                isInside = true;
+                output.append(ch); // alternative : result += ch
+            }
+            else if(ch == ')'){ // once it reaches the ')',
+                // the isInside turns into false, but store the remaining char
+                isInside = false;
+                output.append(ch);
+            }
+
+            // Sample: My code is (1234abc) and my pin 5678
+
+            //mask the value inside the parenthesis with '*'
+            else if(isInside){ //(isInside && Character.isDigit(ch)) to mask only the digits
+                output.append('*');
+            }else{
+                output.append(ch); // store the rest of the characters
+            }
+
+        }
+        System.out.println("Sensitive Information Hidden: " + output); //Display
+        System.out.println();
+
+    }
+    static void diamondStringPattern(){
+        System.out.println(" --- Diamond String Pattern --- ");
+
+        //prompt
+        System.out.println("Enter text: ");
+        String text = scanner.nextLine();
+
+        int n = text.length();
+
+        if(text.isEmpty()){ // Validation
+            System.out.println("Input Cannot be Empty. Try again");
+            return; // Exit the method
+        }
+
+        System.out.println("Output: ");
+        //Top half/ Triangle
+        for(int i = 1; i <= n; i++){
+            //loop starts at 1, so first substring is (0, 1) - first character
+            System.out.println(text.substring(0,i));
+        }
+        // Bottom half/reverse triangle
+        for(int i = n-1; i >= 0; i--){
+            // As i decreases, the printed string shrinks from the right
+            System.out.println(text.substring(0,i));
+        }
+        System.out.println();
+    }
+    static void snakeCase(){
+
+        System.out.println(" --- Snake Case --- ");
+
+        //Prompt
+        System.out.println("snake_Case");
+        System.out.println("Sample input: this_is_a_test_variable_name");
+        System.out.println("Enter text:");
+        String text = scanner.nextLine();
+
+
+        if(text.isEmpty()){ // Validation
+            System.out.println("Input Cannot be Empty. Try again");
+            return; // Exits method
+        }
+
+        // Split input into an array based on the underscore
+        // For example: test_array_me into [test, array, me]
+        String [] words = text.split("_");
+
+        String result = ""; // handler/store the final transformed sentence
+
+        for(String word : words){ // enhanced for loop to iterate
+            if(word.length() % 2 == 0){ // check if the word is even
+
+                // gets the first characters and capitalize them
+                result += word.substring(0,1).toUpperCase() +
+                        // gets everything else from index 1
+                        word.substring(1).toLowerCase();
+
+            }else{
+                result += word.toLowerCase(); //Odd, keep everything else the same
+            }
+
+            result += " "; // Add space to separate each word
+        }
+
+        // print result and remove extra space (the last space)
+        System.out.println( "Updated Result: " + result.trim());
+
+        System.out.println();
+
+
+    }
+    static void isPalindrome(){
+        System.out.println(" --- Is Palindrome --- ");
+        System.out.print("Enter text: ");
+        String text = scanner.nextLine();
+
+        if (text.isEmpty()) { //Validation
+            System.out.println("Empty string is a palindrome.");
+            return; //Exit the method early
+        }
+
+        // Compress the string
+        // Initialize 'compressed' with the first character of the input
+        String compressed = "" + text.charAt(0); // Start with the first character
+
+        //Loop through the rest of the string starting from index 1(second character)
+        for (int i = 1; i < text.length(); i++) {
+            // compare the current character at i with i - 1 (the one right before it)
+            if (text.charAt(i) != text.charAt(i - 1)) {
+                // If they are different, add the current character to compressed string
+                compressed += text.charAt(i);
+            }
+        }
+
+        /*
+        Sample:
+        M-A-D-A-M is already compressed since no consecutive letters are similar
+        H-E-L-L-O would be H-E-L-0
+         */
+
+        System.out.println("Compressed: " + compressed);  //Print result
+
+        // Check if it's a palindrome
+        String reversed = ""; // handler to store reversed version of compressed string
+        for (int i = compressed.length() - 1; i >= 0; i--) {
+            reversed += compressed.charAt(i); // Add each character one by one
+        }
+
+         /*
+        Sample:
+        M-A-D-A-M is compressed, reverse is still M-A-D-A-M
+            which is a palindrome
+        H-E-L-L-O would be H-E-L-0, reverse is O-L-E-H
+            which is not a palindrome
+
+         */
+
+        // palindrome reads the same forward and backward
+        if (compressed.equals(reversed)) {
+            System.out.println("Palindrome: Yes");
+        } else {
+            System.out.println("Palindrome: No");
+        }
+        System.out.println();
+    }
+}
+
