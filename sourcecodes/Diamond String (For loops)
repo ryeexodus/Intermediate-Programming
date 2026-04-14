@@ -1,0 +1,78 @@
+import java.util.*;
+public class Diamond {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        //Diamond Attempt
+        System.out.println("Enter a word: ");
+        String word = scanner.nextLine();
+
+        int size = word.length();
+
+//Upper part
+
+        for (int i = 0; i < size; i++) {
+            char ch = word.charAt(i);
+            for (int j = i; j < size; j++) {
+
+                System.out.print("  ");
+            }
+            for (int j = i; j < size; j++) {
+                if (i == j) {
+                    System.out.print(ch + " ");
+                }
+            }
+
+            for (int j = 0; j < i; j++) {
+                    System.out.print("  ");
+                }
+            for (int j = 0; j < i; j++) {
+                System.out.print("  ");
+            }
+
+            for (int j = i; j < size; j++) {
+                if (i == j) {
+                    System.out.print(ch + " ");
+                }
+
+            }
+
+            System.out.println();
+
+        }
+
+        //Bottom part
+        for (int i = size -2  ; i >= 0; i--) {
+            char ch = word.charAt(i);
+
+            for (int j = i; j < size; j++) {
+
+                System.out.print("  ");
+            }
+            for (int j = i; j < size; j++) {
+                if (i == j) {
+                    System.out.print(ch + " ");
+                }
+            }
+
+            for (int j = 0; j < i; j++) {
+                System.out.print("  ");
+            }
+            for (int j = 0; j < i; j++) {
+                System.out.print("  ");
+            }
+
+            for (int j = i; j < size; j++) {
+                if(i==j) {
+                    System.out.print(ch + " ");
+                }
+            }
+
+            System.out.println();
+
+        }
+
+    }
+}
+
+
